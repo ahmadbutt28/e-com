@@ -25,7 +25,7 @@
         <v-icon>mdi-update</v-icon>
         profile</v-btn
       >
-      <v-btn class="ml-2" to="/">
+      <v-btn class="ml-2" @click="log()" to="/" >
         <v-icon>mdi-logout</v-icon>
         Logout</v-btn
       >
@@ -111,6 +111,13 @@ export default {
 
   name: "Main",
   mounted() {
+    if(localStorage.getItem("currentUser") == ""){
+
+          this.$router.push({ name: "SignUp" });
+
+ 
+
+      }
     this.$store.dispatch("loadPosts");
   },
   computed: {
@@ -125,6 +132,10 @@ export default {
       this.$store.dispatch("fatchsingleProductData", apiId);
       this.$router.push({ name: "SingleProduct" });
     },
+    log(){
+      this.$router.push({name:"Signup"});
+      localStorage.setItem("currentUser","");
+    }
   },
 
   data: () => ({

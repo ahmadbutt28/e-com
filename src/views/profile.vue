@@ -199,6 +199,13 @@ export default {
   },
 
   mounted() {
+     if(localStorage.getItem("currentUser") == ""){
+
+          this.$router.push({ name: "Signup" });
+
+ 
+
+      }
     this.firstname = localStorage.getItem("firstname");
     this.lastname = localStorage.getItem("lastname");
     this.username = localStorage.getItem("username");

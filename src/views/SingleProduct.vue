@@ -25,7 +25,7 @@
         <v-icon>mdi-update</v-icon>
         profile</v-btn
       >
-      <v-btn class="ml-2" to="/">
+      <v-btn class="ml-2" @click="log()" to="/">
         <v-icon>mdi-logout</v-icon>
         Logout</v-btn
       >
@@ -95,6 +95,10 @@ export default {
     button() {
       this.snackbar = true;
     },
+    log(){
+      this.$router.push({name:"SignUp"});
+      localStorage.setItem("currentUser","");
+    }
   },
 
   computed: {
