@@ -1,4 +1,5 @@
 <template>
+<!-- This folder contains data related to Categories -->
   <div>
     <v-system-bar app>
       <v-spacer></v-spacer>
@@ -9,7 +10,7 @@
 
       <v-icon>mdi-triangle</v-icon>
     </v-system-bar>
-
+      <!-- navbar with MDI icons -->
     <v-app-bar app>
       <v-toolbar-title>Shopify</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -17,15 +18,18 @@
         <v-icon>mdi-home</v-icon>
         Home</v-btn
       >
-      <v-btn class="ml-2" to="/Catogary">
+      <v-btn class="ml-2" to="/Category">
         <v-icon>mdi-basket</v-icon>
-        Catogary</v-btn
+        Category</v-btn
       >
+       <v-btn class="ml-2" router to="/cart">
+        <v-icon>mdi-cart</v-icon>
+        Cart</v-btn>
       <v-btn class="ml-2" to="/profile">
         <v-icon>mdi-update</v-icon>
         profile</v-btn
       >
-      <v-btn class="ml-2" @click="log()" to="/">
+      <v-btn class="ml-2" @click="log()" >
         <v-icon>mdi-logout</v-icon>
         Logout</v-btn
       >
@@ -34,7 +38,7 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       
     </v-navigation-drawer>
-
+<!-- Slider -->
     <v-carousel hide-delimiters>
       <v-carousel-item
         v-for="(item, i) in items"
@@ -42,15 +46,16 @@
         :src="item.src"
       ></v-carousel-item>
     </v-carousel>
+    <!-- Fetching Category Names -->
     <v-container>
       <v-row>
         <v-col
           sm="3"
           md="3"
-          v-for="(CatogaryName, index) in Catogary"
+          v-for="(CategoryName, index) in Category"
           :key="index"
         >
-          <v-btn @click="fetchdata(CatogaryName)">{{ CatogaryName }}</v-btn>
+          <v-btn @click="fetchdata(CategoryName)">{{ CategoryName }}</v-btn>
         </v-col>
       </v-row>
 
@@ -93,6 +98,7 @@
                   color="success"
                   outlined
                   @click="button()"
+                  
                 >
                   <v-icon left small>mdi-plus</v-icon>
                   Add to Cart</v-btn
@@ -111,6 +117,7 @@
     <v-snackbar top color="green" v-model="snackbar">
       Successfully Add to Cart
     </v-snackbar>
+    <!-- Adding Footer -->
     <Footer />
   </div>
 </template>
@@ -153,10 +160,19 @@ export default {
       this.$store.dispatch("fatchsingleProductData", apiId);
       this.$router.push({ name: "SingleProduct" });
     },
+    // after logout hide all data related to user goes null
     log(){
-      this.$router.push({name:"Signup"});
+      
       localStorage.setItem("currentUser","");
-    }
+      this.$router.push({name:"SignUp"});
+    },
+    // Adding data into cart
+     addCart(apiId){
+      this.snackbar = true;
+      this.$store.dispatch("Add",apiId)
+
+
+    },
   },
 
   mounted() {
@@ -167,12 +183,14 @@ export default {
  
 
       }
-    this.$store.dispatch("loadCatogary");
+    this.$store.dispatch("loadCategory");
   },
   computed: {
     ...mapGetters(["getSingleProduct"]),
-    ...mapState(["Catogary"]),
+    ...mapState(["Category"]),
     ...mapGetters(["getCat"]),
+    ...mapState(["cart"]),
+    ...mapGetters(["cart"])
   },
 };
 </script>

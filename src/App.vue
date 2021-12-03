@@ -18,12 +18,12 @@ export default {
   name: "Main",
   mounted() {
     this.$store.dispatch("loadPosts");
-        this.$store.dispatch("loadCatogary");
+        this.$store.dispatch("loadCategory");
 
   },
   computed: {
     ...mapState(["posts"]),
-        ...mapState(["Catogary"]),
+        ...mapState(["Category"]),
 
 
   },

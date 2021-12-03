@@ -1,12 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Catogary from "../views/Catogary";
+import Category from "../views/Category";
 import SingleProduct from "../views/SingleProduct"
 import SignUp from "../views/SignUp"
 import Login from "../views/Login"
 import DashBoard from "../views/DashBoard"
 import profile from "../views/profile"
+import Cart from "../views/Cart"
 Vue.use(VueRouter);
 
 const routes = [
@@ -16,10 +17,16 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Catogary",
-    name: "Catogary",
-    component: Catogary,
+    path: "/Category",
+    name: "Category",
+    component: Category,
   },
+  {
+    path: "/Cart",
+    name: "Cart",
+    component: Cart,
+  },
+
   {
     path: "/SingleProduct",
     name: "SingleProduct",

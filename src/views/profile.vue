@@ -1,4 +1,6 @@
 <template>
+<!-- This folder conatins a form that is been used for update the profile in this form the data is getting or comes which we a
+added in signup form or by which we login -->
   <div class="img">
     <v-system-bar app>
       <v-spacer></v-spacer>
@@ -17,20 +19,23 @@
         <v-icon>mdi-home</v-icon>
         Home</v-btn
       >
-      <v-btn class="ml-2" to="/Catogary">
+      <v-btn class="ml-2" to="/Category">
         <v-icon>mdi-basket</v-icon>
-        Catogary</v-btn
+        Category</v-btn
       >
+       <v-btn class="ml-2" router to="/cart">
+        <v-icon>mdi-cart</v-icon>
+        Cart</v-btn>
       <v-btn class="ml-2" to="/profile">
         <v-icon>mdi-update</v-icon>
         profile</v-btn
       >
-      <v-btn class="ml-2" to="/">
+      <v-btn class="ml-2" @click="log()" >
         <v-icon>mdi-logout</v-icon>
         Logout</v-btn
       >
     </v-app-bar>
-
+<!-- Forms data -->
     <v-row justify="center">
       <v-col class="mt-10" cols="12" sm="10" md="8" lg="6">
         <v-card ref="form">
@@ -222,6 +227,11 @@ export default {
       Object.keys(this.form).forEach((f) => {
         this.$refs[f].reset();
       });
+    },
+     log(){
+      
+      localStorage.setItem("currentUser","");
+      this.$router.push({name:"SignUp"});
     },
     submit() {
       this.formHasErrors = false;

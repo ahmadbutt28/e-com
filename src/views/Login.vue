@@ -1,4 +1,5 @@
 <template>
+<!-- This folder contains a form for login and its validation comes from validation.js file -->
   <v-app  class="background">
     <div class="backgruond">
     <v-main class="d-flex justify-center align-center mt-16 mb-16">
@@ -18,7 +19,7 @@
                 type="email"
                 label="Email"
                 placeholder="Email"
-                prepend-inner-icon="mdi-account"
+                prepend-inner-icon="mdi-email"
                 required
               />
               <v-text-field
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+// Importing validation
 import {
         emailRule,
         passwordRule, } from '../views/validation';

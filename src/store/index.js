@@ -8,9 +8,10 @@ export default new Vuex.Store({
  
   state:{
     posts:[],
-    Catogary: [],
+    Category: [],
     post: "",
     singleproductData: [],
+    cart:[],
   },
   actions:{
     loadPosts({commit}){
@@ -25,13 +26,13 @@ export default new Vuex.Store({
              console.log(error)
            })
     },
-    loadCatogary ({commit}) {
+    loadCategory ({commit}) {
       axios
       .get('https://fakestoreapi.com/products/categories')
       .then(res => {
         console.log(res.data)
-        let Catogary = res.data
-        commit('SET_CATOGARY', Catogary)
+        let Category = res.data
+        commit('SET_CATEGORY', Category)
       })
       .catch(error => {
         console.log(error)
@@ -60,14 +61,29 @@ export default new Vuex.Store({
         console.log(error)
       })
   },
+
+  Add({commit},payload){
+    // alert(payload)
+    axios
+    .get(`https://fakestoreapi.com/products/${payload}`)
+    .then(data => {
+      console.log(data.data)
+      let product = data.data
+      commit('SET_CART', product)
+   })
+   .catch(error => {
+    console.log(error)
+  })
+
+  }
   },
 
   mutations:{
     SET_POSTS (state,posts){
       state.posts = posts
     },
-    SET_CATOGARY(state, Catogary){
-      state.Catogary = Catogary
+    SET_CATEGORY(state, Category){
+      state.Category = Category
     },
     SET_CAT(state,post){
       state.post = post; 
@@ -75,6 +91,10 @@ export default new Vuex.Store({
     SET_PRODUCT(state, singleproductData){
       state.singleproductData = singleproductData
   },
+    SET_CART(state, cartData){
+      state.cart.push(cartData)
+      // console.log(state.cart)
+    }
   },
   getters:{
     getCat(state){
@@ -82,7 +102,11 @@ export default new Vuex.Store({
     }, 
     getSingleProduct(state){
       return state.singleproductData;
-    } 
+    } ,
+    getCart(state){
+      return state.cart;
+
+    }
   },
   
 });

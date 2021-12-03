@@ -1,4 +1,5 @@
 <template>
+<!-- This File conatins Footer data -->
   <v-footer
     dark
     padless

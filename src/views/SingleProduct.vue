@@ -1,4 +1,5 @@
 <template>
+<!-- This folder shows a product that is being view by clicking on see details button -->
   <div class="backimage">
     <v-system-bar app>
       <v-spacer></v-spacer>
@@ -17,15 +18,15 @@
         <v-icon>mdi-home</v-icon>
         Home</v-btn
       >
-      <v-btn class="ml-2" to="/Catogary">
+      <v-btn class="ml-2" to="/Category">
         <v-icon>mdi-basket</v-icon>
-        Catogary</v-btn
+        Category</v-btn
       >
       <v-btn class="ml-2" to="/profile">
         <v-icon>mdi-update</v-icon>
         profile</v-btn
       >
-      <v-btn class="ml-2" @click="log()" to="/">
+      <v-btn class="ml-2" @click="log()" >
         <v-icon>mdi-logout</v-icon>
         Logout</v-btn
       >
@@ -96,8 +97,8 @@ export default {
       this.snackbar = true;
     },
     log(){
-      this.$router.push({name:"SignUp"});
       localStorage.setItem("currentUser","");
+      this.$router.push({name:"SignUp"});
     }
   },
 

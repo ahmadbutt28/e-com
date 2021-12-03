@@ -1,4 +1,5 @@
 <template>
+<!-- This folder contains folder contains the form for registration -->
   <div class="main">
     <v-row justify="center">
       <v-col class="mt-10" cols="12" sm="10" md="8" lg="6">
@@ -176,27 +177,29 @@ export default {
       });
     },
     submit() {
-      if(this.$refs.form.validate()){
-      localStorage.setItem(this.userData.email, JSON.stringify(this.userData));
-      localStorage.setItem("firstname", this.userData.name.firstname);
-      localStorage.setItem("lastname", this.userData.name.lastname);
-      localStorage.setItem("username", this.userData.username);
-      localStorage.setItem("currentUser", this.userData.email);
-      localStorage.setItem("password", this.userData.password);
-      localStorage.setItem("phone", this.userData.phone);
-      this.$router.push({ name: "Login" });
+      if (this.$refs.form.validate()) {
+        localStorage.setItem(
+          this.userData.email,
+          JSON.stringify(this.userData)
+        );
+        localStorage.setItem("firstname", this.userData.name.firstname);
+        localStorage.setItem("lastname", this.userData.name.lastname);
+        localStorage.setItem("username", this.userData.username);
+        localStorage.setItem("currentUser", this.userData.email);
+        localStorage.setItem("password", this.userData.password);
+        localStorage.setItem("phone", this.userData.phone);
+        this.$router.push({ name: "Login" });
 
-      this.formHasErrors = false;
+        this.formHasErrors = false;
 
-      Object.keys(this.form).forEach((f) => {
-        if (!this.form[f]) this.formHasErrors = true;
+        Object.keys(this.form).forEach((f) => {
+          if (!this.form[f]) this.formHasErrors = true;
 
-        this.$refs[f].validate(true);
-      });
-    }
-    }
+          this.$refs[f].validate(true);
+        });
+      }
+    },
   },
-
 };
 </script>
 <style>

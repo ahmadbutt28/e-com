@@ -1,4 +1,5 @@
 <template>
+<!-- This folder contains all the data for dashboard or we can say Home page and after login the first open in this page -->
   <v-app id="inspire">
     <v-system-bar app>
       <v-spacer></v-spacer>
@@ -9,7 +10,7 @@
 
       <v-icon>mdi-triangle</v-icon>
     </v-system-bar>
-
+<!-- Navbar -->
     <v-app-bar app>
       <v-toolbar-title>Shopify</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -17,15 +18,21 @@
         <v-icon>mdi-home</v-icon>
         Home</v-btn
       >
-      <v-btn class="ml-2" to="/Catogary">
+      <v-btn class="ml-2" to="/Category">
         <v-icon>mdi-basket</v-icon>
-        Catogary</v-btn
+        Category</v-btn
       >
+      <v-btn class="ml-2" router to="/cart">
+      <v-badge color="blue">
+                <v-icon>mdi-cart</v-icon>
+
+      </v-badge>
+        Cart</v-btn>
       <v-btn class="ml-2" to="/profile">
         <v-icon>mdi-update</v-icon>
         profile</v-btn
       >
-      <v-btn class="ml-2" @click="log()" to="/" >
+      <v-btn class="ml-2" @click="log()"  >
         <v-icon>mdi-logout</v-icon>
         Logout</v-btn
       >
@@ -78,9 +85,9 @@
                 color="success"
                 class="mx-3 mb-5 mt-5 ms-5"
                 outlined
-                @click="button()"
+@click="addCart(item.id)"
               >
-                <v-icon left small>mdi-plus</v-icon>
+                <v-icon left small >mdi-plus</v-icon>
                 Add to Cart</v-btn
               >
               <v-btn
@@ -96,6 +103,7 @@
     <v-snackbar top color="green" v-model="snackbar">
       Successfully Add to Cart
     </v-snackbar>
+    <!-- Adding Footer -->
     <Footer />
   </v-app>
 </template>
@@ -123,19 +131,29 @@ export default {
   computed: {
     ...mapState(["posts"]),
     ...mapGetters(["getSingleProduct"]),
+        ...mapState(["cart"]),
+
+        ...mapGetters(["cart"])
+
   },
   methods: {
+    // Fetching single product data
     button() {
-      this.snackbar = true;
-    },
+      },
     fatchsingleProductData(apiId) {
       this.$store.dispatch("fatchsingleProductData", apiId);
       this.$router.push({ name: "SingleProduct" });
     },
     log(){
-      this.$router.push({name:"Signup"});
       localStorage.setItem("currentUser","");
-    }
+      this.$router.push({name:"SignUp"});
+    },
+    addCart(apiId){
+      this.snackbar = true;
+      this.$store.dispatch("Add",apiId)
+
+
+    },
   },
 
   data: () => ({
